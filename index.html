@@ -6,17 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Hexo</title>
+  <title>Lewis个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
+  <meta name="description" content="念念不忘，必有回响">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Lewis个人博客">
 <meta property="og:url" content="http://yoursite.com/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="Lewis个人博客">
+<meta property="og:description" content="念念不忘，必有回响">
 <meta property="og:locale" content="en_US">
-<meta property="article:author" content="John Doe">
+<meta property="article:author" content="Lewis">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="Lewis个人博客" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -46,8 +48,10 @@
 			<img src="" class="js-avatar">
 		</a>
 		<hgroup>
-		  <h1 class="header-author"><a href="/">John Doe</a></h1>
+		  <h1 class="header-author"><a href="/">Lewis</a></h1>
 		</hgroup>
+		
+		<p class="header-subtitle">Lewis个人博客</p>
 		
 
 		<nav class="header-menu">
@@ -104,8 +108,10 @@
 				<img src="" class="js-avatar">
 			</div>
 			<hgroup>
-			  <h1 class="header-author js-header-author">John Doe</h1>
+			  <h1 class="header-author js-header-author">Lewis</h1>
 			</hgroup>
+			
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>Lewis个人博客<i class="icon icon-quo-right"></i></p>
 			
 			
 			
@@ -151,6 +157,132 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-数据库设计步骤" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/01/18/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E6%AD%A5%E9%AA%A4/">数据库设计步骤</a>
+    </h1>
+  
+
+        
+        <a href="/2020/01/18/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E6%AD%A5%E9%AA%A4/" class="archive-article-date">
+  	<time datetime="2020-01-18T07:11:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="设计步骤"><a href="#设计步骤" class="headerlink" title="设计步骤"></a>设计步骤</h1><h2 id="重点"><a href="#重点" class="headerlink" title="重点"></a>重点</h2><ol>
+<li><p>了解设计的步骤</p>
+</li>
+<li><p>了解E-R图和范式</p>
+<blockquote>
+<p>对于文件  可以访问  效率不高  文件被访问 被占用<br>  数据库  </p>
+</blockquote>
+<h2 id="1-需求分析"><a href="#1-需求分析" class="headerlink" title="1. 需求分析"></a>1. 需求分析</h2><p> 从上往下 思考<br> 需要做什么事情  用户需求</p>
+<h1 id="需要查询学生"><a href="#需要查询学生" class="headerlink" title="需要查询学生"></a>需要查询学生</h1><p> 需要查询教室<br> 需要知道班主任是谁….</p>
+<p> 存放哪些重要数据   主体  学生  课程  教师</p>
+<pre><code>学生 (学号 名字 性别 出生日期 年龄  家庭住址...)
+课程(  )
+教师(  )
+成绩(  )</code></pre><p> 小型的例子(大脑构思下就行)  大型 别人分析好了  画图</p>
+<h2 id="2-概念结构设计"><a href="#2-概念结构设计" class="headerlink" title="2. 概念结构设计"></a>2. 概念结构设计</h2><p>  需求中 找到实体,确定属性,画E-R图(实体联系图)</p>
+<p>   学生 —(选课)—-&gt; 课程  (多对多)<br>   教师 —(上课)—-&gt; 课程   (多对多)</p>
+<p>  两个实体之间   1对1 1:1  一个老师只带一门课  这门课只有这个老师上</p>
+<pre><code>1对多  1:n  一个老师可以上多门课  这些课 只交给这个老师
+多对多    m:n   一个学生可以选择多门课程,一门课程可以有多个学生</code></pre><p> 矩形  表示实体<br> 椭圆  表示属性(主属性  在下面加一条下划线)<br> 实线  连接<br> 菱形 表示联系</p>
+</li>
+</ol>
+<h2 id="3-逻辑结构设计"><a href="#3-逻辑结构设计" class="headerlink" title="3. 逻辑结构设计"></a>3. 逻辑结构设计</h2><pre><code>将E-R图 转变成逻辑结构 树  图  ...
+mysql 二维表  形式不一
+
+范式 设计表  要求 规范
+
+第一范式  1NF
+    原子性  每条属性 不可以继续分解
+        成绩 (总分 ---&gt;单科成绩)
+        工资 (基础工资 补贴 加班费 绩效....)
+第二范式  2NF
+    1NF 每条非主属性 必须完全依赖于主属性 
+    主属性 用于区分其他记录的 必须唯一
+    其他的 非主属性 (E-R图中 主属性会在下面加一条下划线)
+
+    对于表格中  没有办法找到主属性  手动添加一条
+
+第三范式  3NF   ---&gt; BCNF     
+    在第二范式的基础上 其他非主属性 不能存在依赖 
+
+    BCNF 在第三范式基础上 非主属性不能对非主属性子集依赖
+
+
+第四范式  4NF
+    表中不能包含一个实体多个独立的多值因子
+        一个人 多个电话
+        联系方式(员工号,电话号,固定电话号)
+
+第五范式  5NF(完美范式)
+    第四范式 表必须分解更小的子表
+
+一般数据库设计 到3NF或者BCNF就可以
+
+需要查询一条记录  需要查询多个表格  才能做操作
+在实际实现的时候  也可以不满足第三范式
+
+员工工资表(id,基础工资 补贴 加班费 绩效,总工资) 
+查询时间会变少  用空间换时间
+
+表格优化处理 </code></pre><h2 id="4-物理结构设计"><a href="#4-物理结构设计" class="headerlink" title="4. 物理结构设计"></a>4. 物理结构设计</h2><pre><code>将逻辑结构设计的内容实施到具体环境中,依赖于DBMS系统和硬件
+DBMS  数据库管理系统  mysql
+
+关系型数据  支持sql语言  二维表存放
+NoSQL   有自己不同存放方式
+data base </code></pre><h2 id="5-数据库实施"><a href="#5-数据库实施" class="headerlink" title="5. 数据库实施"></a>5. 数据库实施</h2><pre><code>加载数据  测试和试运行</code></pre><h2 id="6-数据库的运行和维护"><a href="#6-数据库的运行和维护" class="headerlink" title="6. 数据库的运行和维护"></a>6. 数据库的运行和维护</h2><pre><code>改善数据库的性能  维护数据库安全性和完整性</code></pre>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/01/18/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E6%AD%A5%E9%AA%A4/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-博客" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -406,7 +538,7 @@ mysql -h localhost -P 3306 -u root -p
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2020 John Doe
+    		&copy; 2020 Lewis
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
